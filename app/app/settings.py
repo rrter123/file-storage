@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "account",
     "organization",
+    "file",
     "rest_framework",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -146,6 +148,7 @@ AWS_S3_ENDPOINT_URL = "http://s3mock:9090"
 AWS_S3_CUSTOM_DOMAIN = "localhost:9090/filebucket"
 AWS_S3_ADDRESSING_STYLE = "path"
 AWS_S3_SECURE_URLS = False
+AWS_S3_URL_PROTOCOL = "http:"
 
 AWS_S3_CUSTOM_DOMAIN = f"localhost:9090/{AWS_STORAGE_BUCKET_NAME}"
 
