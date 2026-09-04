@@ -25,6 +25,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  s3mock:
+    image: adobe/s3mock:latest
+    environment:
+      - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=filebucket
+    ports:
+      - 9090:9090
+      - 9191:9191
 
 volumes:
   postgres_data:

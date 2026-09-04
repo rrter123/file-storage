@@ -132,3 +132,28 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
+
+AWS_STORAGE_BUCKET_NAME = "filebucket"
+
+# Placeholder values, s3mock doesn't care about them
+AWS_ACCESS_KEY_ID = "local-access-key"
+AWS_SECRET_ACCESS_KEY = "local-secret-key"
+AWS_S3_REGION_NAME = "us-east-1"
+
+
+AWS_S3_ENDPOINT_URL = "http://s3mock:9090"
+
+AWS_S3_CUSTOM_DOMAIN = "localhost:9090/filebucket"
+AWS_S3_ADDRESSING_STYLE = "path"
+AWS_S3_SECURE_URLS = False
+
+AWS_S3_CUSTOM_DOMAIN = f"localhost:9090/{AWS_STORAGE_BUCKET_NAME}"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}

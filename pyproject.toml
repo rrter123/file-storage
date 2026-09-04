@@ -5,7 +5,9 @@ description = "File storage app"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "boto3>=1.43.88",
     "django>=6.1.1",
+    "django-storages[s3]>=1.14.6",
     "djangorestframework>=3.18.0",
     "markdown>=3.10.3",
     "pre-commit>=4.6.2",
@@ -14,3 +16,4 @@ dependencies = [
 
 [tool.uv]
 package = false
+exclude-newer = "7 days"
