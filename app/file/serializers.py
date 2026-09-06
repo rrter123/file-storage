@@ -7,7 +7,7 @@ from file.models import Download, File
 class FileSerializer(serializers.ModelSerializer):
     organization = serializers.PrimaryKeyRelatedField(read_only=True)
     download_link = serializers.SerializerMethodField()
-    download_count = serializers.CharField(read_only=True)
+    download_count = serializers.IntegerField(read_only=True)
 
     def get_download_link(self, file):
         request = self.context["request"]
@@ -38,10 +38,10 @@ class FileSerializer(serializers.ModelSerializer):
 class DownloadByUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Download
-        fields = ("file", "download_time")
+        fields = ("id", "file", "download_time")
 
 
 class DownloadByFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Download
-        fields = ("user", "download_time")
+        fields = ("id", "user", "download_time")

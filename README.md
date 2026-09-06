@@ -36,3 +36,10 @@ This will create two organizations and two users:
 When you finish you can take down the containers with
 
 `docker compose down -v`
+
+
+# Unittests
+
+To run unittests use:
+
+`docker exec file-storage-django uv run manage.py test`
