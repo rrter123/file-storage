@@ -29,4 +29,4 @@ class Command(BaseCommand):
             user.set_password("test")
             user.save()
             Employee.objects.create(user=user, organization=organization_2)
-        print("Successfully created objects")
+        self.stdout.write("Successfully created objects")

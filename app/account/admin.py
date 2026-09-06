@@ -12,6 +12,7 @@ class EmployeeAdmin(admin.ModelAdmin):
 class EmployeeInline(admin.StackedInline):
     model = Employee
     can_delete = False
+    # Make employee mandatory
     extra = 1
     min_num = 1
     validate_min = True
