@@ -1,10 +1,18 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
 
+def file_unique_name(instance, filename):
+    # Add datetime to the filename to ensure uniqueness
+    filename_list = filename.split(".")
+    filename_list.insert(-1, datetime.now().strftime("%Y-%m-%d_%H%M%S"))
+    return ".".join(filename_list)
+
+
 class File(models.Model):
-    # TODO: Make filenames unique since they all live on the same bucket (add id)
-    file_object = models.FileField()
+    file_object = models.FileField(upload_to=file_unique_name)
     organization = models.ForeignKey(
         "organization.Organization", on_delete=models.CASCADE, related_name="files"
     )
