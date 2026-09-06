@@ -1,5 +1,6 @@
 services:
   db:
+    container_name: file-storage-database
     image: postgres:18.6
     volumes:
       - postgres_data:/var/lib/postgresql
@@ -14,6 +15,7 @@ services:
       retries: 5
 
   web:
+    container_name: file-storage-django
     build:
       context: .
       dockerfile: app/Dockerfile
@@ -26,6 +28,7 @@ services:
       db:
         condition: service_healthy
   s3mock:
+    container_name: file-storage-s3mock
     image: adobe/s3mock:latest
     environment:
       - COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS=filebucket
