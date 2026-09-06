@@ -27,6 +27,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      s3mock:
+        condition: service_started
+
   s3mock:
     container_name: file-storage-s3mock
     image: adobe/s3mock:latest
