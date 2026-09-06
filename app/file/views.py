@@ -4,7 +4,11 @@ from rest_framework import mixins, viewsets
 from rest_framework.decorators import action
 
 from file.models import Download, File
-from file.serializers import FileSerializer
+from file.serializers import (
+    DownloadByFileSerializer,
+    DownloadByUserSerializer,
+    FileSerializer,
+)
 
 
 class FileViewSet(
@@ -21,3 +25,23 @@ class FileViewSet(
         file = self.get_object()
         Download.objects.create(file=file, user=self.request.user)
         return redirect(file.file_object.url)
+
+
+class DownloadByUserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
+    model = Download
+    serializer_class = DownloadByUserSerializer
+
+    def get_queryset(self):
+        if user_id := self.kwargs.get("user_id"):
+            return Download.objects.filter(user=user_id)
+        return Download.objects.none()
+
+
+class DownloadByFileViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
+    model = Download
+    serializer_class = DownloadByFileSerializer
+
+    def get_queryset(self):
+        if file_id := self.kwargs.get("file_id"):
+            return Download.objects.filter(file=file_id)
+        return Download.objects.none()

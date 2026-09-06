@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.reverse import reverse
 
-from file.models import File
+from file.models import Download, File
 
 
 class FileSerializer(serializers.ModelSerializer):
@@ -33,3 +33,15 @@ class FileSerializer(serializers.ModelSerializer):
             "download_link",
             "download_count",
         )
+
+
+class DownloadByUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Download
+        fields = ("file", "download_time")
+
+
+class DownloadByFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Download
+        fields = ("user", "download_time")
